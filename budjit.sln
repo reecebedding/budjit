@@ -22,6 +22,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "budjit.core.data", "src\budjit.core.data\budjit.core.data.csproj", "{5F298B10-F00B-4C45-9540-490B34971E13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "budjit.core.models", "src\budjit.core.models\budjit.core.models.csproj", "{6DE56CCF-083E-4284-9105-C3E9DE423B2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "budjit.core.data.test", "test\budjit.core.data.test\budjit.core.data.test.csproj", "{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +46,18 @@ Global
 		{89EC5636-611E-452C-BEC1-19A950DCEA99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89EC5636-611E-452C-BEC1-19A950DCEA99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89EC5636-611E-452C-BEC1-19A950DCEA99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F298B10-F00B-4C45-9540-490B34971E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F298B10-F00B-4C45-9540-490B34971E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F298B10-F00B-4C45-9540-490B34971E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F298B10-F00B-4C45-9540-490B34971E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE56CCF-083E-4284-9105-C3E9DE423B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE56CCF-083E-4284-9105-C3E9DE423B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE56CCF-083E-4284-9105-C3E9DE423B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE56CCF-083E-4284-9105-C3E9DE423B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +66,9 @@ Global
 		{49456BA9-20B4-4744-8687-A6C1994A0C33} = {2EBACC96-2426-479E-9571-5BD0EB4F6D91}
 		{4D2CE4B3-C867-48AF-AFCA-408C3D69F50E} = {DF83FF76-9CE4-4251-BE43-02452B9BF3AE}
 		{89EC5636-611E-452C-BEC1-19A950DCEA99} = {2EBACC96-2426-479E-9571-5BD0EB4F6D91}
+		{5F298B10-F00B-4C45-9540-490B34971E13} = {2EBACC96-2426-479E-9571-5BD0EB4F6D91}
+		{6DE56CCF-083E-4284-9105-C3E9DE423B2A} = {2EBACC96-2426-479E-9571-5BD0EB4F6D91}
+		{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F} = {DF83FF76-9CE4-4251-BE43-02452B9BF3AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C80C7E09-0F8E-4D42-A6CA-F63BE27108C9}

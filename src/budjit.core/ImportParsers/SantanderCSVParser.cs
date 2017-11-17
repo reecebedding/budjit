@@ -1,7 +1,7 @@
 ﻿using budjit.core.ImportParsers.Contracts;
 using System;
 using System.Collections.Generic;
-using budjit.core.Models;
+using budjit.core.models;
 using System.Linq;
 using System.Globalization;
 using budjit.core.ImportParsers.Exceptions;

@@ -1,7 +1,7 @@
 ﻿using budjit.core.ImportParsers;
 using budjit.core.ImportParsers.Contracts;
 using budjit.core.ImportParsers.Exceptions;
-using budjit.core.Models;
+using budjit.core.models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;

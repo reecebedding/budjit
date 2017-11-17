@@ -1,4 +1,4 @@
-﻿using budjit.core.Models;
+﻿using budjit.core.models;
 using System.Collections.Generic;
 
 namespace budjit.core.ImportParsers.Contracts

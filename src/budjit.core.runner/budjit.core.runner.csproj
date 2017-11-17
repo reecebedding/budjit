@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\budjit.core.data\budjit.core.data.csproj" />
     <ProjectReference Include="..\budjit.core\budjit.core.csproj" />
   </ItemGroup>
 
