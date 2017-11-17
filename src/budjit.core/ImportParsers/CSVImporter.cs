@@ -11,6 +11,7 @@ namespace budjit.core.ImportParsers
         private FileInfo fileInfo;
         private IFileAccess fileAccess;
 
+        public CSVImporter(FileInfo fileInfo) : this(fileInfo, new FileAccess()) { }
         public CSVImporter(FileInfo fileInfo, IFileAccess fileAccess)
         {
             this.fileInfo = fileInfo;
