@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <None Update="SQLite\budjit.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

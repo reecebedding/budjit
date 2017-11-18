@@ -24,9 +24,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "budjit.core.data", "src\budjit.core.data\budjit.core.data.csproj", "{5F298B10-F00B-4C45-9540-490B34971E13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "budjit.core.models", "src\budjit.core.models\budjit.core.models.csproj", "{6DE56CCF-083E-4284-9105-C3E9DE423B2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "budjit.core.models", "src\budjit.core.models\budjit.core.models.csproj", "{6DE56CCF-083E-4284-9105-C3E9DE423B2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "budjit.core.data.test", "test\budjit.core.data.test\budjit.core.data.test.csproj", "{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "budjit.core.data.test", "test\budjit.core.data.test\budjit.core.data.test.csproj", "{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "budjit.ui", "src\budjit.ui\budjit.ui.csproj", "{A7503784-EA75-40D6-BBC9-A1D14E481B9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7503784-EA75-40D6-BBC9-A1D14E481B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7503784-EA75-40D6-BBC9-A1D14E481B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7503784-EA75-40D6-BBC9-A1D14E481B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7503784-EA75-40D6-BBC9-A1D14E481B9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +75,7 @@ Global
 		{5F298B10-F00B-4C45-9540-490B34971E13} = {2EBACC96-2426-479E-9571-5BD0EB4F6D91}
 		{6DE56CCF-083E-4284-9105-C3E9DE423B2A} = {2EBACC96-2426-479E-9571-5BD0EB4F6D91}
 		{4B869E1A-9C50-466C-B9A8-DDDF2EDBB71F} = {DF83FF76-9CE4-4251-BE43-02452B9BF3AE}
+		{A7503784-EA75-40D6-BBC9-A1D14E481B9F} = {2EBACC96-2426-479E-9571-5BD0EB4F6D91}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C80C7E09-0F8E-4D42-A6CA-F63BE27108C9}
