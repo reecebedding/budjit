@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using budjit.core.models;
 using Microsoft.Data.Sqlite;
+using budjit.core.data.SQLite.Formatters;
+using System.Linq;
 
 namespace budjit.core.data.SQLite
 {
@@ -56,6 +58,53 @@ namespace budjit.core.data.SQLite
                 commands.Add(GetInsertCommand(trans));
             }
             context.Save(commands);
+        }
+
+        public Transaction GetTransactionById(int id)
+        {
+            var selectCommand = new SqliteCommand
+            {
+                CommandText = "select * from transactions where id = $id"
+            };
+
+            selectCommand.Parameters.AddWithValue("$id", id);
+
+            List<object> result = context.Query(selectCommand, new TransactionDataFormatter()).ToList();
+            if (result.Count > 0)
+                return (Transaction)result.First();
+
+            return null;
+        }
+
+        public IEnumerable<Transaction> GetTransactionInDateRange(DateTime start, DateTime end)
+        {
+            var selectCommand = new SqliteCommand
+            {
+                CommandText = "select * from transactions where date >= $from and date <= $to"
+            };
+
+            selectCommand.Parameters.AddWithValue("$from", start.ToShortDateString());
+            selectCommand.Parameters.AddWithValue("$to", end.ToShortDateString());
+
+            List<object> result = context.Query(selectCommand, new TransactionDataFormatter()).ToList();
+            if (result.Count > 0)
+                return result.Select(x => (Transaction)x);
+
+            return null;
+        }
+
+        public IEnumerable<Transaction> GetAll()
+        {
+            var selectCommand = new SqliteCommand
+            {
+                CommandText = "select * from transactions"
+            };
+            
+            List<object> result = context.Query(selectCommand, new TransactionDataFormatter()).ToList();
+            if (result.Count > 0)
+                return result.Select(x => (Transaction)x);
+
+            return null;
         }
     }
 }

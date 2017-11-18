@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using budjit.core.data.SQLite.Formatter;
+using budjit.core.data.SQLite.Formatters;
+using Microsoft.Data.Sqlite;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +13,30 @@ namespace budjit.core.data.SQLite
         private static string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private SqliteConnection SqliteConnection => new SqliteConnection($"DataSource={path}\\SQLite\\budjit.db");
 
+        public IEnumerable<object> Query(SqliteCommand command, IDataFormatter formatter)
+        {
+            List<object> values = new List<object>();
+            using (var connection = SqliteConnection)
+            {
+                connection.Open();
+                using (var sqlTransaction = connection.BeginTransaction())
+                {
+                    command.Connection = connection;
+                    command.Transaction = sqlTransaction;
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var result = formatter.Format(reader);
+                            values.Add(result);
+                        }
+                    }
+                }
+            }
+            return values;
+        }
+
         public void Save(SqliteCommand command)
         {
             using (var connection = SqliteConnection)
@@ -18,8 +44,7 @@ namespace budjit.core.data.SQLite
                 connection.Open();
                 using (var sqlTransaction = connection.BeginTransaction())
                 {
-                    connection.Open();
-
+                    command.Connection = connection;
                     command.Transaction = sqlTransaction;
 
                     command.ExecuteNonQuery();

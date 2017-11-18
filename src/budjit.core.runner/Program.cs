@@ -23,9 +23,9 @@ namespace budjit.core.runner
             
             ITransactionsRepository repo = new TransactionRepository(new BudjitContext());
             repo.SaveTransactions(transactions);
-
+            
             int count = 1;
-            foreach (Transaction trans in transactions)
+            foreach (Transaction trans in repo.GetAll())
             {
                 Console.WriteLine($"{count} - {trans.Description}");
 
