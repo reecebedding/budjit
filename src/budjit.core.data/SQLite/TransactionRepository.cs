@@ -83,8 +83,8 @@ namespace budjit.core.data.SQLite
                 CommandText = "select * from transactions where date >= $from and date <= $to"
             };
 
-            selectCommand.Parameters.AddWithValue("$from", start.ToShortDateString());
-            selectCommand.Parameters.AddWithValue("$to", end.ToShortDateString());
+            selectCommand.Parameters.AddWithValue("$from", start.ToString("yyyy-MM-dd"));
+            selectCommand.Parameters.AddWithValue("$to", end.ToString("yyyy-MM-dd"));
 
             List<object> result = context.Query(selectCommand, new TransactionDataFormatter()).ToList();
             if (result.Count > 0)
