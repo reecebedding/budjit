@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ElectronNET.API;
+using budjit.core.data.Contracts;
+using budjit.core.data.SQLite;
 
 namespace budjit.ui
 {
@@ -23,6 +25,11 @@ namespace budjit.ui
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddTransient<IBudjitContext, BudjitContext>();
+            services.AddTransient<ITransactionsRepository, TransactionRepository>(
+                (IServiceProvider provider) => new TransactionRepository(provider.GetService<IBudjitContext>())
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

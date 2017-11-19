@@ -21,7 +21,14 @@ namespace budjit.core.ImportParsers
 
         private static string GetDataFromImporter(IImporter importer)
         {
-            return importer.Import();   
+            try
+            {
+                return importer.Import();
+            }
+            catch (Exception e)
+            {
+                throw new ParsingException("Unable to retrieve data from file", e);
+            }
         }
 
         public static IEnumerable<Transaction> Parse(IImporter importer)
@@ -78,7 +85,7 @@ namespace budjit.core.ImportParsers
             }
             catch (Exception e)
             {
-                throw new InvalidCSVException($"Error parsing CSV data. Error: {e.Message}");
+                throw new ParsingException($"Error parsing data", new InvalidCSVException($"Invalid CSV data. Error: {e.Message}"));
             }
         }
     }
