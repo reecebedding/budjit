@@ -50,6 +50,8 @@ namespace budjit.core.ImportParsers
             string[] currentTransaction = new string[5];
             int currentVal = 0;
 
+            Func<string, string> sanitizeCurrency = delegate (string value) { return value.Remove(1, 1); };
+
             try
             {
                 for (int i = 0; i < lines.Length; i++)
@@ -61,8 +63,8 @@ namespace budjit.core.ImportParsers
                             Date = DateTime.Parse(currentTransaction[0]),
                             Description = currentTransaction[2],
                             Merchant = currentTransaction[2],
-                            Alteration = decimal.Parse(currentTransaction[3], NumberStyles.Currency),
-                            Balance = decimal.Parse(currentTransaction[4], NumberStyles.Currency)
+                            Alteration = decimal.Parse(sanitizeCurrency(currentTransaction[3]), NumberStyles.Currency),
+                            Balance = decimal.Parse(sanitizeCurrency(currentTransaction[4]), NumberStyles.Currency)
                         };
                         transactions.Add(transaction);
                         currentTransaction = new string[5];
