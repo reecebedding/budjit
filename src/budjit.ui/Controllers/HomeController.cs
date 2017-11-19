@@ -8,14 +8,21 @@ using budjit.ui.Models;
 using budjit.core.data;
 using budjit.core.models;
 using budjit.core.data.SQLite;
+using budjit.core.data.Contracts;
 
 namespace budjit.ui.Controllers
 {
     public class HomeController : Controller
     {
+        ITransactionsRepository transactionRepository;
+        public HomeController(ITransactionsRepository transRepo)
+        {
+            transactionRepository = transRepo;
+        }
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Transaction> data = (transactionRepository.GetAll() ?? new List<Transaction>()).ToList();
+            return View(data);
         }
 
         public IActionResult Error()

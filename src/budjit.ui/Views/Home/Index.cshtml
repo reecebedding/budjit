@@ -1,5 +1,38 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model IEnumerable<budjit.core.models.Transaction>
 
 <h1>Home Page</h1>
+
+<h2>Your transactions - @Model.Count()</h2>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Merchant</th>
+        <th>Description</th>
+        <th>Alteration</th>
+        <th>Balance</th>
+    </tr>
+    @foreach (budjit.core.models.Transaction trans in Model)
+    {
+        <tr>
+            <td>
+                @trans.Date
+            </td>
+            <td>
+                @trans.Merchant
+            </td>
+            <td>
+                @trans.Description
+            </td>
+            <td>
+                @trans.Alteration
+            </td>
+            <td>
+                @trans.Balance
+            </td>
+        </tr>
+    }
+</table>
