@@ -18,28 +18,43 @@ namespace budjit.core.data.SQLite
 
         public IEnumerable<Transaction> GetAll()
         {
-            return db.Transactions;
+            return db.Transactions
+                .Include(trans => trans.Tag);
         }
 
         public Transaction GetTransactionById(int id)
         {
-            return db.Transactions.Where(x => x.ID == id).FirstOrDefault();
+            return db.Transactions
+                .Include(trans => trans.Tag)
+                .Where(x => x.ID == id).FirstOrDefault();
         }
 
         public IEnumerable<Transaction> GetTransactionInDateRange(DateTime start, DateTime end)
         {
-            return db.Transactions.Where(x => (x.Date >= start && x.Date <= end));
+            return db.Transactions
+                .Include(trans => trans.Tag)
+                .Where(x => (x.Date >= start && x.Date <= end));
         }
 
         public void SaveTransaction(Transaction transaction)
         {
-            db.Transactions.Add(transaction);
+            if (transaction.ID > 0)
+                db.Transactions.Update(transaction);
+            else
+                db.Transactions.Add(transaction);
             db.SaveChanges();
         }
 
         public void SaveTransactions(IEnumerable<Transaction> transactions)
         {
-            db.Transactions.AddRange(transactions);
+            IEnumerable<Transaction> newTransactions = transactions.Where(x => x.ID == 0);
+            IEnumerable<Transaction> updateTransactions = transactions.Where(x => x.ID > 0);
+
+            if (newTransactions.Count() > 0)
+                db.Transactions.AddRange(newTransactions);
+            if (updateTransactions.Count() > 0)
+                db.Transactions.UpdateRange(updateTransactions);
+
             db.SaveChanges();
         }
     }

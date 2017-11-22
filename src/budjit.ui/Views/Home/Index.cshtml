@@ -14,6 +14,7 @@
         <th>Description</th>
         <th>Alteration</th>
         <th>Balance</th>
+        <th>Tag</th>
     </tr>
     @foreach (budjit.core.models.Transaction trans in Model)
     {
@@ -33,6 +34,24 @@
             <td>
                 @trans.Balance
             </td>
+            <td>
+                @Html.DropDownListFor(model => trans.Tag.ID, new[] {
+                    new SelectListItem { Value = "", Text = "" },
+                    new SelectListItem { Value = "1", Text = "Tag 1" },
+                    new SelectListItem { Value = "2", Text = "Tag 2" }
+                }, new {
+                    onchange = $"ChangeTag({trans.ID}, this.value);"
+                })
+            </td>
         </tr>
     }
 </table>
+
+<script>
+    function ChangeTag(transactionId, tagId) {
+        var url = '/api/transaction/'+ transactionId;
+        var data = tagId;
+
+        $.ajax({ url: url, data: JSON.stringify(data), type: 'POST', contentType: 'application/json' });
+    }
+</script>

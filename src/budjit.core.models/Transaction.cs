@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace budjit.core.models
 {
@@ -12,5 +10,8 @@ namespace budjit.core.models
         public String Description { get; set; }
         public decimal Alteration { get; set; }
         public decimal Balance { get; set; }
+
+        public int? TagID { get; set; }
+        public Tag Tag { get; set; }
     }
 }
