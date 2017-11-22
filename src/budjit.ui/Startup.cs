@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using ElectronNET.API;
 using budjit.core.data.Contracts;
 using budjit.core.data.SQLite;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Reflection;
 
 namespace budjit.ui
 {
@@ -26,9 +29,23 @@ namespace budjit.ui
         {
             services.AddMvc();
 
-            services.AddTransient<IBudjitContext, BudjitContext>();
+            services.AddSingleton<BudjitContext, BudjitContext>(
+                (IServiceProvider provider) => 
+                {
+                    string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    var builder = new DbContextOptionsBuilder<BudjitContext>().UseSqlite($"DataSource={path}\\SQLite\\budjit.db");
+                    
+                    var context = new BudjitContext(builder.Options);
+
+                    //Need to call migrate on construction as this allows the embedded db to be migrated
+                    context.Database.Migrate();
+
+                    return context;
+                }
+            );
+
             services.AddTransient<ITransactionsRepository, TransactionRepository>(
-                (IServiceProvider provider) => new TransactionRepository(provider.GetService<IBudjitContext>())
+                (IServiceProvider provider) => new TransactionRepository(provider.GetService<BudjitContext>())
             );
         }
 

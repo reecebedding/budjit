@@ -3,9 +3,12 @@ using budjit.core.data.Contracts;
 using budjit.core.data.SQLite;
 using budjit.core.ImportParsers;
 using budjit.core.models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace budjit.core.runner
 {
@@ -20,8 +23,11 @@ namespace budjit.core.runner
             List<Transaction> transactions = SantanderCSVParser.Parse(importer).ToList();
 
             Console.WriteLine($"Found {transactions.Count} transactions");
-            
-            ITransactionsRepository repo = new TransactionRepository(new BudjitContext());
+
+            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var builder = new DbContextOptionsBuilder<BudjitContext>().UseSqlite($"DataSource={path}\\SQLite\\budjit.db");
+
+            ITransactionsRepository repo = new TransactionRepository(new BudjitContext(builder.Options));
             repo.SaveTransactions(transactions);
 
             List<Transaction> databaseTransactions = repo.GetAll().ToList() ;

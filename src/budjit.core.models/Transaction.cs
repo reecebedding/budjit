@@ -6,6 +6,7 @@ namespace budjit.core.models
 {
     public class Transaction
     {
+        public int ID { get; set; }
         public DateTime Date { get; set; }
         public String Merchant { get; set; }
         public String Description { get; set; }

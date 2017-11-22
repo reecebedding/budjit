@@ -14,14 +14,14 @@ namespace budjit.ui.Controllers
 {
     public class HomeController : Controller
     {
-        ITransactionsRepository transactionRepository;
+        ITransactionsRepository transactionsRepository;
         public HomeController(ITransactionsRepository transRepo)
         {
-            transactionRepository = transRepo;
+            transactionsRepository = transRepo;
         }
         public IActionResult Index()
         {
-            IEnumerable<Transaction> data = (transactionRepository.GetAll() ?? new List<Transaction>()).ToList();
+            IEnumerable<Transaction> data = (transactionsRepository.GetAll() ?? new List<Transaction>()).ToList();
             return View(data);
         }
 
