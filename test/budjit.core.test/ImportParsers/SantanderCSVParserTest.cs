@@ -69,7 +69,7 @@ namespace budjit.core.test.ImportParsers
 
             SantanderCSVParser parser = new SantanderCSVParser(importer);
 
-            Assert.ThrowsException<InvalidCSVException>(parser.Parse, "Error parsing CSV data. Error: Input string was not in a correct format.");
+            Assert.ThrowsException<ParsingException>(parser.Parse, "Error parsing data");
             mockImporter.Verify(i => i.Import(), Times.Once());
         }
 

@@ -57,7 +57,9 @@ namespace budjit.core.ImportParsers
             string[] currentTransaction = new string[5];
             int currentVal = 0;
 
-            Func<string, string> sanitizeCurrency = delegate (string value) { return value.Remove(1, 1); };
+            Func<string, string> sanitizeCurrency = delegate (string value) {
+                return value.Trim().Remove(1, 1);
+            };
 
             try
             {
