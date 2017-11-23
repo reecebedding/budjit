@@ -28,11 +28,11 @@ namespace budjit.ui.API
             try
             {
                 transactionsRepository.SaveTransaction(transaction);
-                return StatusCode(500);
+                return Ok();
             }
             catch (Exception ex)
             {
-                return Ok();
+                return StatusCode(500);
             }
         }
     }
