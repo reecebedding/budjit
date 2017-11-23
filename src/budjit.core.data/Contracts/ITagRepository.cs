@@ -7,7 +7,7 @@ namespace budjit.core.data.Contracts
 {
     public interface ITagRepository
     {
-        Tag GetTagById(int ID);
-        IEnumerable<Tag> GetAllTags();
+        Tag GetById(int ID);
+        IEnumerable<Tag> GetAll();
     }
 }

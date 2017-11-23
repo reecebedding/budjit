@@ -20,7 +20,7 @@ namespace budjit.ui.API
         [HttpGet]
         public IEnumerable<Tag> GetAllTags()
         {
-            return tagRepository.GetAllTags();
+            return tagRepository.GetAll();
         }
     }
 }

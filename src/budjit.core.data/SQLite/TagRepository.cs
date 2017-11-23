@@ -14,12 +14,12 @@ namespace budjit.core.data.SQLite
         {
             this.db = context;
         }
-        public IEnumerable<Tag> GetAllTags()
+        public IEnumerable<Tag> GetAll()
         {
             return db.Tags;
         }
 
-        public Tag GetTagById(int ID)
+        public Tag GetById(int ID)
         {
             return db.Tags.Where(x => x.ID == ID).FirstOrDefault();
         }

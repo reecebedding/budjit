@@ -25,7 +25,7 @@ namespace budjit.ui.Controllers
         public IActionResult Index()
         {
             IEnumerable<Transaction> data = (transactionsRepository.GetAll() ?? new List<Transaction>()).ToList();
-            ViewBag.Tags = tagRepository.GetAllTags().ToList();
+            ViewBag.Tags = tagRepository.GetAll().ToList();
             return View(data);
         }
 
