@@ -7,6 +7,12 @@
 
 <h2>Your transactions - @Model.Count()</h2>
 
+@{ 
+    List<budjit.core.models.Tag> tags = (List<budjit.core.models.Tag>)ViewBag.Tags;
+    List<SelectListItem> tagSelects = new List<SelectListItem>() { new SelectListItem() };
+    tagSelects.AddRange(tags.Select(x => new SelectListItem() { Value = x.ID.ToString(), Text = x.Name }));
+}
+
 <table>
     <tr>
         <th>Date</th>
@@ -35,13 +41,9 @@
                 @trans.Balance
             </td>
             <td>
-                @Html.DropDownListFor(model => trans.Tag.ID, new[] {
-                    new SelectListItem { Value = "", Text = "" },
-                    new SelectListItem { Value = "1", Text = "Tag 1" },
-                    new SelectListItem { Value = "2", Text = "Tag 2" }
-                }, new {
-                    onchange = $"ChangeTag({trans.ID}, this.value);"
-                })
+                @Html.DropDownListFor(model => trans.Tag.ID, tagSelects, new {
+                   onchange = $"ChangeTag({trans.ID}, this.value);"
+               })
             </td>
         </tr>
     }
@@ -49,7 +51,7 @@
 
 <script>
     function ChangeTag(transactionId, tagId) {
-        var url = '/api/transaction/'+ transactionId;
+        var url = '/api/transaction/' + transactionId;
         var data = tagId;
 
         $.ajax({ url: url, data: JSON.stringify(data), type: 'POST', contentType: 'application/json' });

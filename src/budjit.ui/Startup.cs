@@ -47,6 +47,10 @@ namespace budjit.ui
             services.AddTransient<ITransactionsRepository, TransactionRepository>(
                 (IServiceProvider provider) => new TransactionRepository(provider.GetService<BudjitContext>())
             );
+
+            services.AddTransient<ITagRepository, TagRepository>(
+                (IServiceProvider provider) => new TagRepository(provider.GetService<BudjitContext>())
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

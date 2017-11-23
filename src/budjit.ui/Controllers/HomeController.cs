@@ -15,13 +15,17 @@ namespace budjit.ui.Controllers
     public class HomeController : Controller
     {
         ITransactionsRepository transactionsRepository;
-        public HomeController(ITransactionsRepository transRepo)
+        ITagRepository tagRepository;
+
+        public HomeController(ITransactionsRepository transRepo, ITagRepository tagRepository)
         {
             transactionsRepository = transRepo;
+            this.tagRepository = tagRepository;
         }
         public IActionResult Index()
         {
             IEnumerable<Transaction> data = (transactionsRepository.GetAll() ?? new List<Transaction>()).ToList();
+            ViewBag.Tags = tagRepository.GetAllTags().ToList();
             return View(data);
         }
 
