@@ -39,6 +39,8 @@
         @RenderBody()
     </div>
 
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -61,5 +63,8 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+    <script>if (window.module) module = window.module;</script>
+
 </body>
 </html>
