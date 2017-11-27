@@ -23,5 +23,24 @@ namespace budjit.core.data.SQLite
         {
             return db.Tags.Where(x => x.ID == ID).FirstOrDefault();
         }
+
+        public Tag GetByName(string name)
+        {
+            return db.Tags.Where(x => x.Name == name).FirstOrDefault();
+        }
+
+        public Tag Create(Tag tag)
+        {
+            tag = db.Tags.Add(tag).Entity;
+            db.SaveChanges();
+            return tag;
+        }
+
+        public Tag Update(Tag tag)
+        {
+            tag = db.Tags.Update(tag).Entity;
+            db.SaveChanges();
+            return tag;
+        }
     }
 }

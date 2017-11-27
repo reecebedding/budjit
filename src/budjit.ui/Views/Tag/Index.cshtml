@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<budjit.core.models.Tag>
+
+@{
+    budjit.core.models.Tag newTag = new budjit.core.models.Tag();
+}
+
+<h1>Tags</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+    </tr>
+    @foreach (budjit.core.models.Tag tag in Model)
+    {
+        <tr>
+            <td>
+                @tag.Name
+            </td>
+        </tr>
+    }
+</table>
+
+<h1>Add new tag</h1>
+
+<form action="/api/tag" method="post">
+
+    @Html.LabelFor(x => newTag.Name)
+    @Html.TextBoxFor(x => newTag.Name)
+    <br />
+
+    <input type="submit" value="Create new tag" />
+</form>
