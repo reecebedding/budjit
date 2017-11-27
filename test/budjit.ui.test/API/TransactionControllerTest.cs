@@ -22,8 +22,8 @@ namespace budjit.ui.test.API
             Transaction transaction = new Transaction() { ID = 1, Description = "Description" };
 
             var mockTagRepo = new Mock<ITransactionsRepository>();
-            mockTagRepo.Setup(x => x.GetTransactionById(1)).Returns(transaction);
-            mockTagRepo.Setup(x => x.SaveTransaction(It.IsAny<Transaction>()));
+            mockTagRepo.Setup(x => x.GetById(1)).Returns(transaction);
+            mockTagRepo.Setup(x => x.Create(It.IsAny<Transaction>()));
 
             var controller = new TransactionController(mockTagRepo.Object);
 
@@ -42,8 +42,8 @@ namespace budjit.ui.test.API
             Transaction transaction = new Transaction() { ID = 1, Description = "Description" };
 
             var mockTagRepo = new Mock<ITransactionsRepository>();
-            mockTagRepo.Setup(x => x.GetTransactionById(1)).Returns(transaction);
-            mockTagRepo.Setup(x => x.SaveTransaction(It.IsAny<Transaction>())).Throws(new Exception("Random exception"));
+            mockTagRepo.Setup(x => x.GetById(1)).Returns(transaction);
+            mockTagRepo.Setup(x => x.Create(It.IsAny<Transaction>())).Throws(new Exception("Random exception"));
 
             var controller = new TransactionController(mockTagRepo.Object);
 

@@ -39,11 +39,10 @@ namespace budjit.core.data.test.SQLite
         }
 
         [TestMethod]
-        public void ShouldSaveTransaction()
+        public void ShouldCreateTransaction()
         {
             Transaction transaction = new Transaction()
             {
-                ID = 100,
                 Date = DateTime.Now,
                 Description = "Fake Description",
                 Merchant = "Fake Merchant",
@@ -55,7 +54,7 @@ namespace budjit.core.data.test.SQLite
             {
                 ITransactionsRepository transactionsRepository = new TransactionRepository(context);
                 
-                transactionsRepository.SaveTransaction(transaction);
+                transactionsRepository.Create(transaction);
             }
 
             Transaction foundTransaction;
@@ -69,7 +68,7 @@ namespace budjit.core.data.test.SQLite
         }
 
         [TestMethod]
-        public void ShouldSaveTransactions()
+        public void ShouldCreateNewTransactions()
         {
             int transactionCount = 10;
             using (var context = GetContext(contextOptions))
@@ -77,9 +76,9 @@ namespace budjit.core.data.test.SQLite
                 ITransactionsRepository transactionsRepository = new TransactionRepository(context);
 
                 var transactions = Enumerable.Range(1, transactionCount)
-                    .Select(i => new Transaction { ID = i, Date = DateTime.Now, Description = $"Fake Description{i}", Merchant = $"Fake Merchant{i}", Alteration = -100m * i, Balance = 1000m * i });
+                    .Select(i => new Transaction { Date = DateTime.Now, Description = $"Fake Description{i}", Merchant = $"Fake Merchant{i}", Alteration = -100m * i, Balance = 1000m * i });
 
-                transactionsRepository.SaveTransactions(transactions);
+                transactionsRepository.Create(transactions);
             }
 
             int foundTransactionCount;
@@ -107,7 +106,7 @@ namespace budjit.core.data.test.SQLite
             using (var context = GetContext(contextOptions))
             {
                 ITransactionsRepository repository = new TransactionRepository(context);
-                foundTransaction = repository.GetTransactionById(1);
+                foundTransaction = repository.GetById(1);
             }
 
             Assert.AreEqual(1, foundTransaction.ID);
@@ -133,7 +132,7 @@ namespace budjit.core.data.test.SQLite
             using (var context = GetContext(contextOptions))
             {
                 ITransactionsRepository repository = new TransactionRepository(context);
-                foundTransactions = repository.GetTransactionInDateRange(DateTime.Now.AddDays(-2), DateTime.Now).ToList();
+                foundTransactions = repository.GetInDateRange(DateTime.Now.AddDays(-2), DateTime.Now).ToList();
             }
 
             Assert.AreEqual(2, foundTransactions.Count);

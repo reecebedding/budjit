@@ -22,12 +22,12 @@ namespace budjit.ui.API
         [HttpPost("{id}")]
         public IActionResult Post(int id, [FromBody]int? tagValue)
         {
-            Transaction transaction = transactionsRepository.GetTransactionById(id);
+            Transaction transaction = transactionsRepository.GetById(id);
             transaction.TagID = tagValue == 0 ? null : tagValue;
 
             try
             {
-                transactionsRepository.SaveTransaction(transaction);
+                transactionsRepository.Create(transaction);
                 return Ok();
             }
             catch (Exception ex)

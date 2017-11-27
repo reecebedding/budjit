@@ -47,7 +47,7 @@ namespace budjit.ui.Controllers
                 try
                 {
                     data = parser.Parse();
-                    transactionsRepository.SaveTransactions(data);
+                    transactionsRepository.Create(data);
                 }
                 catch (ParsingException e)
                 {

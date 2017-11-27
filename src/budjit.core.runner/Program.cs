@@ -28,7 +28,7 @@ namespace budjit.core.runner
             var builder = new DbContextOptionsBuilder<BudjitContext>().UseSqlite($"DataSource={path}\\SQLite\\budjit.db");
 
             ITransactionsRepository repo = new TransactionRepository(new BudjitContext(builder.Options));
-            repo.SaveTransactions(transactions);
+            repo.Create(transactions);
 
             List<Transaction> databaseTransactions = repo.GetAll().ToList() ;
 
