@@ -12,9 +12,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "budjit.core.test", "test\budjit.core.test\budjit.core.test.csproj", "{4D2CE4B3-C867-48AF-AFCA-408C3D69F50E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "budjit.core.runner", "src\budjit.core.runner\budjit.core.runner.csproj", "{89EC5636-611E-452C-BEC1-19A950DCEA99}"
-	ProjectSection(ProjectDependencies) = postProject
-		{49456BA9-20B4-4744-8687-A6C1994A0C33} = {49456BA9-20B4-4744-8687-A6C1994A0C33}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{1BE3FA20-7BA7-4863-9BF2-76AEDBF04E5D}"
 	ProjectSection(SolutionItems) = preProject
