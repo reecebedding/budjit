@@ -33,7 +33,9 @@ namespace budjit.ui
                 (IServiceProvider provider) => 
                 {
                     string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                    var builder = new DbContextOptionsBuilder<BudjitContext>().UseSqlite($"DataSource={path}\\SQLite\\budjit.db");
+                    string fullPath = Path.Combine(path, "SQLite", "budjit.db");
+
+                    var builder = new DbContextOptionsBuilder<BudjitContext>().UseSqlite($"DataSource={fullPath}");
                     
                     var context = new BudjitContext(builder.Options);
 
