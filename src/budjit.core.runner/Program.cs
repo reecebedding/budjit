@@ -25,12 +25,16 @@ namespace budjit.core.runner
             Console.WriteLine($"Found {transactions.Count} transactions");
 
             string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var builder = new DbContextOptionsBuilder<BudjitContext>().UseSqlite($"DataSource={path}\\SQLite\\budjit.db");
+            string fullPath = Path.Combine(path, "SQLite", "budjit.db");
 
-            ITransactionsRepository repo = new TransactionRepository(new BudjitContext(builder.Options));
+            var builder = new DbContextOptionsBuilder<BudjitContext>().UseSqlite($"DataSource={fullPath}");
+            BudjitContext context = new BudjitContext(builder.Options);
+            context.Database.Migrate();
+
+            ITransactionsRepository repo = new TransactionRepository(context);
             repo.Create(transactions);
 
-            List<Transaction> databaseTransactions = repo.GetAll().ToList() ;
+            List<Transaction> databaseTransactions = repo.GetAll().ToList();
 
             int count = 1;
             foreach (Transaction trans in databaseTransactions)

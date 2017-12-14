@@ -8,14 +8,16 @@
             "windows": {
                 "args": [
                     "${workspaceFolder}/src/budjit.ui/obj/Host/bin/SQLite",
-                    "${workspaceFolder}/src/budjit.ui/bin/Debug/netcoreapp2.0/SQLite"
+                    "${workspaceFolder}/src/budjit.ui/bin/Debug/netcoreapp2.0/SQLite",
+                    "${workspaceFolder}/src/budjit.core.runner/bin/Debug/netcoreapp2.0/SQLite"
                 ]
             },
             "linux": {
                 "args": [
                     "-p",
                     "${workspaceFolder}/src/budjit.ui/obj/Host/bin/SQLite",
-                    "${workspaceFolder}/src/budjit.ui/bin/Debug/netcoreapp2.0/SQLite"
+                    "${workspaceFolder}/src/budjit.ui/bin/Debug/netcoreapp2.0/SQLite",
+                    "${workspaceFolder}/src/budjit.core.runner/bin/Debug/netcoreapp2.0/SQLite"
                 ]
             }
         },
