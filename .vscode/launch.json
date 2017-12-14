@@ -4,6 +4,7 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
+
         {
             "name": "budjit.ui web",
             "type": "coreclr",
@@ -22,10 +23,9 @@
             "name": "budjit.ui electron",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "dotnet electronize ${workspaceFolder}/src/budjit.ui",
-            "args": [],
+            "program": "dotnet",
+            "args": ["electronize", "start"],
             "cwd": "${workspaceFolder}/src/budjit.ui",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
             "console": "internalConsole",
