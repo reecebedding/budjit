@@ -3,6 +3,25 @@
 }
 @model IEnumerable<budjit.core.models.Transaction>
 
+@section scripts {
+    <script src="~/js/lib/angular2-polyfills.js"></script>
+    <script src="~/js/lib/system.src.js"></script>
+    <script src="~/js/lib/Rx.js"></script>
+    <script src="~/js/lib/angular2.js"></script>
+    <script>
+        System.config({
+            packages: {
+                'scripts': {
+                    format: 'cjs',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('js/main').then(null, console.error.bind(console));
+    </script>
+}
+<my-app>
+    
 <h1>Home Page</h1>
 
 <h2>Your transactions - @Model.Count()</h2>
@@ -57,3 +76,5 @@
         $.ajax({ url: url, data: JSON.stringify(data), type: 'POST', contentType: 'application/json' });
     }
 </script>
+
+</my-app>
