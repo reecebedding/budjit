@@ -1,8 +1,12 @@
 var gulp = require('gulp');
 var del = require('del');
+var ts = require('gulp-typescript');
+var runSequence = require('run-sequence');
+
+var tsProject = ts.createProject('tsconfig.json');
+var tsOutDir = tsProject.config.compilerOptions.outDir;
 
 var paths = {
-    scripts: ['Scripts/*.js', 'Scripts/*.ts', 'Scripts/*.map'],
     libs: ['node_modules/angular2/bundles/angular2.js',
         'node_modules/angular2/bundles/angular2-polyfills.js',
         'node_modules/systemjs/dist/system.src.js',
@@ -11,13 +15,24 @@ var paths = {
 };
 
 gulp.task('lib', function() {
-    gulp.src(paths.libs).pipe(gulp.dest('wwwroot/js/lib'));
+	return gulp.src(paths.libs).pipe(gulp.dest(`${tsOutDir}/lib`));
 });
 
 gulp.task('clean', function () {
-    return del(['wwwroot/js/**/*']);
+	return del([`${tsOutDir}/**/*`]);
 });
 
-gulp.task('default', function () {
-    gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/js'))
+gulp.task('build:ts', function() {
+	var tsResult = tsProject.src().pipe(tsProject());
+	return tsResult.js.pipe(gulp.dest(tsOutDir));
+});
+
+gulp.task('rebuild', function() {
+	return runSequence('clean',['lib', 'build:ts']);
+});
+
+gulp.task('default', ['rebuild']);
+
+gulp.task('watch', function() {
+	return 	gulp.watch(tsProject.config.include, ['default']);
 });
