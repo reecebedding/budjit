@@ -22,9 +22,15 @@
             }
         },
         {
+            "label": "build:frontend-assets",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/src/budjit.ui; gulp rebuild"            
+        },
+        {
             "label": "build",
             "command": "dotnet",
             "type": "process",
+            "dependsOn": "build:frontend-assets",
             "args": [
                 "build",
                 "${workspaceFolder}/budjit.sln"
