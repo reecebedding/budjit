@@ -22,6 +22,8 @@
         {
             "name": "budjit.ui electron",
             "type": "coreclr",
+            //Need to run build task first, even though electronize does a `dotnet build`. This is because the .vscode build task does asset compilation too.
+            "preLaunchTask": "build",
             "request": "launch",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "dotnet",
