@@ -25,13 +25,27 @@ namespace budjit.ui.API
         [HttpGet]
         public IActionResult GetAllTags()
         {
-            return Ok(mapper.Map<IEnumerable<Tag>, IEnumerable<TagViewModel>>(tagRepository.GetAll()));
+            try
+            {
+                return Ok(mapper.Map<IEnumerable<Tag>, IEnumerable<TagViewModel>>(tagRepository.GetAll()));
+            }
+            catch (Exception exn)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            return Ok(mapper.Map<Tag, TagViewModel>(tagRepository.GetById(id)));
+            try
+            {
+                return Ok(mapper.Map<Tag, TagViewModel>(tagRepository.GetById(id)));
+            }
+            catch (Exception exn)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpPost]
@@ -41,13 +55,20 @@ namespace budjit.ui.API
             {
                 Tag tag = mapper.Map<TagViewModel, Tag>(newTag);
 
-                tag = tagRepository.Create(tag);
+                try
+                {
+                    tag = tagRepository.Create(tag);
 
-                string url = Url.Action("GetById", "Tag", new RouteValueDictionary(new { id = tag.ID }));
+                    string url = Url.Action("GetById", "Tag", new RouteValueDictionary(new { id = tag.ID }));
 
-                TagViewModel returnTag = mapper.Map<Tag, TagViewModel>(tag);
+                    TagViewModel returnTag = mapper.Map<Tag, TagViewModel>(tag);
 
-                return Created(url, returnTag);
+                    return Created(url, returnTag);
+                }
+                catch (Exception exn)
+                {
+                    return StatusCode(500);
+                }
             }
             else
             {
