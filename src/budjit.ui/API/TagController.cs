@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using budjit.ui.API.ViewModel;
+using AutoMapper;
 
 namespace budjit.ui.API
 {
@@ -13,34 +15,44 @@ namespace budjit.ui.API
     public class TagController : Controller
     {
         private ITagRepository tagRepository;
-        public TagController(ITagRepository tagRepository)
+        private readonly IMapper mapper;
+        public TagController(ITagRepository tagRepository, IMapper mapper)
         {
+            this.mapper = mapper;
             this.tagRepository = tagRepository;
         }
 
         [HttpGet]
-        public IEnumerable<Tag> GetAllTags()
+        public IActionResult GetAllTags()
         {
-            return tagRepository.GetAll();
+            return Ok(mapper.Map<IEnumerable<Tag>, IEnumerable<TagViewModel>>(tagRepository.GetAll()));
         }
 
         [HttpGet("{id}")]
-        public Tag GetById(int id)
+        public IActionResult GetById(int id)
         {
-            return tagRepository.GetById(id);
+            return Ok(mapper.Map<Tag, TagViewModel>(tagRepository.GetById(id)));
         }
-        
-        [HttpPost]
-        public IActionResult Create(Tag newTag)
-        {   
-            if (string.IsNullOrEmpty(newTag.Name))
-                return BadRequest("Name cannot be empty");
-            
-            newTag = tagRepository.Create(newTag);
 
-            string url = Url.Action("GetById", "Tag", new RouteValueDictionary(new { id = newTag.ID }));
-            
-            return Created(url, newTag);
+        [HttpPost]
+        public IActionResult Create(TagViewModel newTag)
+        {
+            if (ModelState.IsValid)
+            {
+                Tag tag = mapper.Map<TagViewModel, Tag>(newTag);
+
+                tag = tagRepository.Create(tag);
+
+                string url = Url.Action("GetById", "Tag", new RouteValueDictionary(new { id = tag.ID }));
+
+                TagViewModel returnTag = mapper.Map<Tag, TagViewModel>(tag);
+
+                return Created(url, returnTag);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
     }
 }

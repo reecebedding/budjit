@@ -12,6 +12,7 @@ using budjit.core.data.SQLite;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Reflection;
+using AutoMapper;
 
 namespace budjit.ui
 {
@@ -40,6 +41,8 @@ namespace budjit.ui
                 cfg.UseSqlite($"DataSource={fullPath}");
             });
             
+            services.AddAutoMapper();
+
             services.AddTransient<ITransactionsRepository, TransactionRepository>(
                 (IServiceProvider provider) => new TransactionRepository(provider.GetService<BudjitContext>())
             );
