@@ -29,13 +29,10 @@ var config = {
 	},
 	jsConfig: {
 		outDir: tsProject.config.compilerOptions.outDir,
-		libs: ['node_modules/bootstrap/dist/js/bootstrap.js',
-		'node_modules/jquery/dist/jquery.js',
-		'node_modules/angular2/bundles/angular2.js',
-        'node_modules/angular2/bundles/angular2-polyfills.js',
-        'node_modules/systemjs/dist/system.src.js',
-        'node_modules/rxjs/bundles/Rx.js'],
-		scripts: []
+		libs: [
+			'node_modules/bootstrap/dist/js/bootstrap.js',
+			'node_modules/jquery/dist/jquery.js'
+		]
 	}
 };
 
