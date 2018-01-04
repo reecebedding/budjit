@@ -12,39 +12,36 @@ using budjit.core.data.SQLite;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Reflection;
+using AutoMapper;
 
 namespace budjit.ui
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
-            services.AddSingleton<BudjitContext, BudjitContext>(
-                (IServiceProvider provider) => 
-                {
-                    string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                    string fullPath = Path.Combine(path, "SQLite", "budjit.db");
+            services.AddDbContext<BudjitContext>(cfg =>
+            {
+                //Need to do connecting string initialization in code as this requires using the assemblies executing location at runtime
+                string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SQLite");
+                if(!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                
+                string fullPath = Path.Combine(path, Configuration.GetConnectionString("budjit"));
 
-                    var builder = new DbContextOptionsBuilder<BudjitContext>().UseSqlite($"DataSource={fullPath}");
-                    
-                    var context = new BudjitContext(builder.Options);
-
-                    //Need to call migrate on construction as this allows the embedded db to be migrated
-                    context.Database.Migrate();
-
-                    return context;
-                }
-            );
+                cfg.UseSqlite($"DataSource={fullPath}");
+            });
+            
+            services.AddAutoMapper();
 
             services.AddTransient<ITransactionsRepository, TransactionRepository>(
                 (IServiceProvider provider) => new TransactionRepository(provider.GetService<BudjitContext>())
