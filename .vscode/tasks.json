@@ -24,7 +24,7 @@
         {
             "label": "build:frontend-assets",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/src/budjit.ui; gulp rebuild"            
+            "command": "cd ${workspaceFolder}/src/budjit.ui; ng build"            
         },
         {
             "label": "build",

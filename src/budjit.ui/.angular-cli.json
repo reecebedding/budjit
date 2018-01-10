@@ -18,8 +18,15 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "../Styles/bootstrap-final.scss",
+        "../Styles/site.scss"
       ],
+      "stylePreprocessorOptions": {
+        "includePaths": [
+          "../node_modules/bootstrap-sass/assets/fonts/bootstrap",
+          "../node_modules/bootstrap-sass/assets/stylesheets"
+        ]
+      },
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -53,7 +60,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "class": {
       "spec": false
     },
