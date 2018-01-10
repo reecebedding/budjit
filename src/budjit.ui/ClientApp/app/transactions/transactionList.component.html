@@ -1,0 +1,22 @@
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Merchant</th>
+                <th scope="col">Description</th>
+                <th scope="col">Alteration</th>
+                <th scope="col">Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of transactions">
+                <td>{{ t.date }}</td>
+                <td>{{ t.merchant }}</td>
+                <td>{{ t.description }}</td>
+                <td>{{ t.alteration | currency:"GBP" }}</td>
+                <td>{{ t.balance | currency:"GBP" }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

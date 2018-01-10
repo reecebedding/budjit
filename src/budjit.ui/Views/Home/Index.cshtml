@@ -4,77 +4,11 @@
 @model IEnumerable<budjit.core.models.Transaction>
 
 @section scripts {
-    <script src="~/js/lib/angular2-polyfills.js"></script>
-    <script src="~/js/lib/system.src.js"></script>
-    <script src="~/js/lib/Rx.js"></script>
-    <script src="~/js/lib/angular2.js"></script>
-    <script>
-        System.config({
-            packages: {
-                'scripts': {
-                    format: 'cjs',
-                    defaultExtension: 'js'
-                }
-            }
-        });
-        System.import('js/main').then(null, console.error.bind(console));
-    </script>
-}
-<my-app>
-    
-<h1>Home Page</h1>
-
-<h2>Your transactions - @Model.Count()</h2>
-
-@{ 
-    List<budjit.core.models.Tag> tags = (List<budjit.core.models.Tag>)ViewBag.Tags;
-    List<SelectListItem> tagSelects = new List<SelectListItem>() { new SelectListItem() };
-    tagSelects.AddRange(tags.Select(x => new SelectListItem() { Value = x.ID.ToString(), Text = x.Name }));
+    <script src="~/ClientApp/dist/inline.bundle.js"></script>
+    <script src="~/ClientApp/dist/polyfills.bundle.js"></script>
+    <script src="~/ClientApp/dist/styles.bundle.js"></script>
+    <script src="~/ClientApp/dist/vendor.bundle.js"></script>
+    <script src="~/ClientApp/dist/main.bundle.js"></script>
 }
 
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Merchant</th>
-        <th>Description</th>
-        <th>Alteration</th>
-        <th>Balance</th>
-        <th>Tag</th>
-    </tr>
-    @foreach (budjit.core.models.Transaction trans in Model)
-    {
-        <tr>
-            <td>
-                @trans.Date
-            </td>
-            <td>
-                @trans.Merchant
-            </td>
-            <td>
-                @trans.Description
-            </td>
-            <td>
-                @trans.Alteration
-            </td>
-            <td>
-                @trans.Balance
-            </td>
-            <td>
-                @Html.DropDownListFor(model => trans.Tag.ID, tagSelects, new {
-                   onchange = $"ChangeTag({trans.ID}, this.value);"
-               })
-            </td>
-        </tr>
-    }
-</table>
-
-<script>
-    function ChangeTag(transactionId, tagId) {
-        var url = '/api/transaction/' + transactionId;
-        var data = tagId;
-
-        $.ajax({ url: url, data: JSON.stringify(data), type: 'POST', contentType: 'application/json' });
-    }
-</script>
-
-</my-app>
+<app-root></app-root>
