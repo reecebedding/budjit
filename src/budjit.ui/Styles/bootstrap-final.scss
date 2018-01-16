@@ -1,3 +1,5 @@
 @import "variables";
-@import "bootstrap";
-@import "bootstrap/theme";
+
+$icon-font-path: "../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/theme";

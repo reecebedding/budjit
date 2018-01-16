@@ -66,6 +66,7 @@ namespace budjit.ui
             }
 
             app.UseStaticFiles();
+            app.UseDefaultFiles();
 
             app.UseMvc(routes =>
             {
