@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { TransactionList } from "./transactions/transactionList.component";
 import { SideNav } from "./shared/navigation/sidenav.component";
 import { Dashboard } from "./dashboard/dashboard.component";
+import { ImportTransaction } from "./transactions/importTransaction.component";
 
 import { DataService } from "./shared/dataService";
 
@@ -14,7 +15,7 @@ import { DataService } from "./shared/dataService";
 let routes: Routes = [
   { path: "", redirectTo:"/dashboard", pathMatch:"full" },
   { path: "dashboard", component: Dashboard },
-  { path: "upload", component: Dashboard },
+  { path: "upload", component: ImportTransaction },
   { path: "new-tag", component: Dashboard },
 ];
 
@@ -23,7 +24,8 @@ let routes: Routes = [
     AppComponent,
     TransactionList,
     SideNav,
-    Dashboard
+    Dashboard,
+    ImportTransaction
   ],
   imports: [
     BrowserModule,

@@ -20,12 +20,7 @@ namespace budjit.ui.Controllers
         {
             transactionsRepository = repository;
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        
         [HttpPost]
         public async Task<IActionResult> Upload(IFormFile file)
         {
