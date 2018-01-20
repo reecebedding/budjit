@@ -1,3 +1,19 @@
 @import "variables";
 
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+.header-container {
+    background-color: $gray-100;
+    padding-bottom: 20px;
+    border-bottom-style: solid;
+    border-bottom-width: $border-width;
+    border-bottom-color: $gray-400;
+    margin-bottom: 10px;
+    height: 50px;
+    padding: 5px;
+    color: $gray-800;
+}
+
+body {
+    color: $gray-800;
+}

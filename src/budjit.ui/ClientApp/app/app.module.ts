@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { TransactionList } from "./transactions/transactionList.component";
@@ -32,7 +33,9 @@ let routes: Routes = [
     RouterModule.forRoot(routes, {
       useHash: true,
       enableTracing: false
-    })
+    }),
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers: [
     DataService
