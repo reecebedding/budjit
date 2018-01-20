@@ -13,12 +13,9 @@
             </div>
 
             <form [formGroup]="fileUploadForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-                <div class="alert alert-danger" *ngIf="!fileUploadForm.controls['transactionsFile'].valid && fileUploadForm.controls['transactionsFile'].touched">
-                    {{ fileMissingError }}
-                </div>
 
                 <div class="form-group">
-                    <input type="file" class="form-control" (change)="onFileChange($event)" formControlName="transactionsFile" />
+                    <input type="file" class="form-control" (change)="onFileChange($event)" #transactionsFileInput />
                 </div>
 
                 <input type="submit" class="btn btn-primary" [disabled]="fileUploadForm.invalid" value="Upload" />

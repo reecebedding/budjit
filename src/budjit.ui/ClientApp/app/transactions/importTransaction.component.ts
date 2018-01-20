@@ -14,12 +14,12 @@ export class ImportTransaction implements OnInit {
     fileUploadForm: FormGroup;
     loading: boolean = false;
 
-    fileMissingError: string = "You must provide a file to upload"
-
     errorMessage: string;
     successMessage: string;
 
     constructor(private formBuilder: FormBuilder, private data: DataService) { }
+
+    @ViewChild("transactionsFileInput") transactionsFileInput: any;
 
     ngOnInit() {
         this.fileUploadForm = this.formBuilder.group({
@@ -31,9 +31,10 @@ export class ImportTransaction implements OnInit {
         this.errorMessage = "";
         this.successMessage = "";
 
-        if (event.target.files.length > 0) {
-            let file = event.target.files[0];
-            this.fileUploadForm.setValue({ "transactionsFile": file });
+        let fileInput = this.transactionsFileInput.nativeElement;
+
+        if (fileInput.files && fileInput.files[0]) {
+            this.fileUploadForm.setValue({ "transactionsFile": fileInput.files[0] })
         }
     }
 
@@ -42,7 +43,7 @@ export class ImportTransaction implements OnInit {
         let file = this.fileUploadForm.get('transactionsFile');
 
         if (file == null) {
-            this.errorMessage = this.fileMissingError;
+            this.errorMessage = "You must provide a file to upload";
             throw new Error("file is null");
         }
 
@@ -72,5 +73,7 @@ export class ImportTransaction implements OnInit {
         this.fileUploadForm.reset({
             transactionsFile: null
         });
+
+        this.transactionsFileInput.nativeElement.value = '';
     }
 }
