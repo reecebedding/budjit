@@ -37,22 +37,5 @@ namespace budjit.ui.API
                 return StatusCode(500);
             }
         }
-
-        [HttpPost("{id}")]
-        public IActionResult Post(int id, [FromBody]int? tagValue)
-        {
-            Transaction transaction = transactionsRepository.GetById(id);
-            transaction.TagID = tagValue == 0 ? null : tagValue;
-
-            try
-            {
-                transactionsRepository.Create(transaction);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500);
-            }
-        }
     }
 }

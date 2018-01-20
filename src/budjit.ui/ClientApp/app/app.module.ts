@@ -15,8 +15,7 @@ import { DataService } from "./shared/dataService";
 let routes: Routes = [
   { path: "", redirectTo:"/dashboard", pathMatch:"full" },
   { path: "dashboard", component: Dashboard },
-  { path: "upload", component: ImportTransaction },
-  { path: "new-tag", component: Dashboard },
+  { path: "upload", component: ImportTransaction }
 ];
 
 @NgModule({
