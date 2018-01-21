@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Reflection;
 using AutoMapper;
+using ElectronNET.API.Entities;
 
 namespace budjit.ui
 {
@@ -51,7 +52,7 @@ namespace budjit.ui
                 (IServiceProvider provider) => new TagRepository(provider.GetService<BudjitContext>())
             );
         }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -76,7 +77,17 @@ namespace budjit.ui
             });
 
             // Open the Electron-Window here
-            Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
+            Task.Run(async () => {
+                //Delay the creation of the electron UI until the server has started listening
+                Byte seconds = 1;
+                await Task.Delay(seconds * 1000);
+
+                BrowserWindowOptions browserOptions = new BrowserWindowOptions(){
+                    BackgroundColor = "#343a40"
+                };
+
+                await Electron.WindowManager.CreateWindowAsync(browserOptions);
+            });
         }
     }
 }
