@@ -13,8 +13,9 @@ namespace budjit.core.test.ImportParsers
     [TestClass]
     public class SantanderCSVParserTest
     {
-        private static string validCsvData = "Date;Type;Merchant/Description;Debit/Credit;Balance;18 / 10 / 2017; CARD PAYMENT; CARD PAYMENT TO FAKE COMPANY; -£1.95; +£1337.03;";
-        private static string validMultipleCsvData = "Date;Type;Merchant/Description;Debit/Credit;Balance;18 / 10 / 2017; CARD PAYMENT; CARD PAYMENT TO FAKE COMPANY; -£1.95; +£1337.03;19 / 11 / 2018; CARD PAYMENT; CARD PAYMENT TO FAKE COMPANY 2; +£10.30; -£123.45;";
+        private DateTime validCSVDate = new DateTime(2017, 10, 18);
+        private string validCsvData => $"Date;Type;Merchant/Description;Debit/Credit;Balance;{validCSVDate.ToShortDateString()}; CARD PAYMENT; CARD PAYMENT TO FAKE COMPANY; -£1.95; +£1337.03;";
+        private string validMultipleCsvData => $"Date;Type;Merchant/Description;Debit/Credit;Balance;{validCSVDate.ToShortDateString()}; CARD PAYMENT; CARD PAYMENT TO FAKE COMPANY; -£1.95; +£1337.03;{validCSVDate.ToShortDateString()}; CARD PAYMENT; CARD PAYMENT TO FAKE COMPANY 2; +£10.30; -£123.45;";
 
         [TestMethod]
         public void ShouldParseCSV_ForValidCSV()
@@ -44,7 +45,7 @@ namespace budjit.core.test.ImportParsers
             Assert.AreEqual(2, result.Length);
 
             AssertTransactionValues(new DateTime(2017, 10, 18), " CARD PAYMENT TO FAKE COMPANY", " CARD PAYMENT TO FAKE COMPANY", -1.95m, 1337.03m, result[0]);
-            AssertTransactionValues(new DateTime(2018, 11, 19), " CARD PAYMENT TO FAKE COMPANY 2", " CARD PAYMENT TO FAKE COMPANY 2", 10.30m, -123.45m, result[1]);
+            AssertTransactionValues(new DateTime(2017, 10, 18), " CARD PAYMENT TO FAKE COMPANY 2", " CARD PAYMENT TO FAKE COMPANY 2", 10.30m, -123.45m, result[1]);
         }
 
         [TestMethod]
@@ -64,7 +65,7 @@ namespace budjit.core.test.ImportParsers
         public void ShouldThrowException_ForInvalidCSV()
         {
             var mockImporter = new Mock<IImporter>();
-            mockImporter.Setup(x => x.Import()).Returns("Date;Type;Merchant/Description;Debit/Credit;Balance;18 / 10 / 2017;RANDOM;RANDOM;NOTANUMBER;NOTANUMBER;RANDOM");
+            mockImporter.Setup(x => x.Import()).Returns($"Date;Type;Merchant/Description;Debit/Credit;Balance;{validCSVDate.ToShortDateString()};RANDOM;RANDOM;NOTANUMBER;NOTANUMBER;RANDOM");
             var importer = mockImporter.Object;
 
             SantanderCSVParser parser = new SantanderCSVParser(importer);
