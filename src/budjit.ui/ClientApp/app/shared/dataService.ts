@@ -17,4 +17,8 @@ export class DataService {
                 return true;
             });
     }
+
+    uploadTransactionFile(file: FormData){
+        return this.http.post('/api/transaction/file', file);
+    }
 }
